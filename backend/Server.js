@@ -14,59 +14,62 @@ app.use(cors({
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// Här finns databas relaterat.
-let currentId = 14
+// Här finns database relaterat.
+let currentToDoId = 14
 
-function incrementCurrentIdByOne() {
-    currentId += 1
-}
 
-let inMemoryDatabase = [
+let toDoInDatabase = [
     {
-        id: 10,
-        name: 'Adam',
-        age: 12,
+        id: 20,
+        name: 'Frank',
+        age: 20,
         gender: 'Male',
     },
     {
-        id: 11,
-        name: 'Bengtina',
-        age: 24,
+        id: 21,
+        name: 'Camilla',
+        age: 30,
         gender: 'Female',
     },
     {
-        id: 12,
-        name: 'Cecilia',
-        age: 36,
+        id: 22,
+        name: 'Suzan',
+        age: 40,
         gender: 'Female',
     },
     {
-        id: 13,
-        name: 'David',
-        age: 48,
+        id: 23,
+        name: 'Alexander',
+        age: 50,
         gender: 'Male',
     },
 ]
 
-// Svarskommunikation från API
-function messageUserNotFound() {
+function incrementToDoCurrentIdByOne() {
+    currentToDoId += 1
+}
+
+
+// Svarskommunikation from API
+function toDoMessageNotFound() {
     return {
         status: 404,
         text: 'User not found!'
     }
 }
 
-function messageSuccess(message) {
+function toDoMessageSuccess(message) {
     return {
         status: 200,
         text: message
     }
 }
 
-//sök i databasen.
-function getUserIndex(id) {
-    for (let i = 0; i < inMemoryDatabase.length; i++) {
-        if (inMemoryDatabase[i].id === id) {
+
+//search in database.
+function getToDoIndex(id) {
+    for (let i = 0; i <  toDoInDatabase.length; i++) {
+        if ( toDoInDatabase[i].id === id) {
             return i
         }
     }
@@ -74,101 +77,101 @@ function getUserIndex(id) {
 }
 
 // CRUD = Create Read Update Delete
-function createNewUser(userData) {
+function createNewToDo(todoData) {
     let user = {
-        id: currentId,
-        name: userData.name,
-        age: userData.age,
-        gender: userData.gender,
+        id: currentToDoId,
+        name: todoData.name,
+        age: todoData.age,
+        gender: todoData.gender,
     }
-    incrementCurrentIdByOne()
-    inMemoryDatabase.push(user)
+    incrementToDoCurrentIdByOne()
+    toDoInDatabase.push(user)
 }
 
-function getAllUsers() {
-    return inMemoryDatabase
+function getAllToDo() {
+    return  toDoInDatabase
 }
 
-function getUserById(id) {
-    let index = getUserIndex(id)
+function getToDoById(id) {
+    let index = getToDoIndex(id)
 
     if (index === -1) {
-        return messageUserNotFound()
+        return toDoMessageNotFound()
     } else {
-        return messageSuccess(inMemoryDatabase[index])
+        return toDoMessageSuccess( toDoInDatabase[index])
     }
 }
 
-function updateUser(userData) {
-    let index = getUserIndex(Number(userData.id))
+function updateToDo(todoData) {
+    let index = getToDoIndex(todoData.id)
 
     if (index === -1) {
-        return messageUserNotFound()
+        return toDoMessageNotFound()
     } else {
-        if (inMemoryDatabase[index].name !== userData.name) {
-            inMemoryDatabase[index].name = userData.name;
+        if ( toDoInDatabase[index].name !== todoData.name) {
+            toDoInDatabase[index].name = todoData.name;
         }
-        if (inMemoryDatabase[index].age !== userData.age) {
-            inMemoryDatabase[index].age = userData.age
+        if ( toDoInDatabase[index].age !== todoData.age) {
+            toDoInDatabase[index].age = todoData.age
         }
-        if (inMemoryDatabase[index].gender !== userData.gender) {
-            inMemoryDatabase[index].gender = userData.gender
+        if (toDoInDatabase[index].gender !== todoData.gender) {
+            toDoInDatabase[index].gender = todoData.gender
         }
 
-        return messageSuccess('User updated!')
+        return toDoMessageSuccess('ToDo updated!')
     }
 }
 
-function deleteUser(index) {
-    inMemoryDatabase.splice(index, 1)
+function deleteToDo(index) {
+    toDoInDatabase.splice(index, 1)
 }
 
 
 
-function deleteUserById(id) {
-    let index = getUserIndex(id)
+function deleteToDoById(id) {
+    let index = getToDoIndex(id)
 
     if (index === -1) {
-        return messageUserNotFound()
+        return toDoMessageNotFound()
     } else {
-        deleteUser(index)
-        return messageSuccess('User deleted!')
+        deleteToDo(index)
+        return toDoMessageSuccess('User deleted!')
     }
 }
 
-//Kontrollerar att APIet lever.
+//Check that API is alive ?
 app.get('/', function (req, res) {
-    res.send('API is Alive!')
+    res.send('API ToDo is Alive!')
 })
 
 //API CRUD
 app.post('/users', function (req, res) {
-    createNewUser(req.body)
-    res.json('Successfully created a new user')
+    createNewToDo(req.body)
+    res.json('Successfully created a new ToDo')
 })
 
 app.get('/users', function (req, res) {
-    res.json(getAllUsers())
+    res.json(getAllToDo())
 })
 
 app.get('/users/:id', function (req, res) {
     const id = Number(req.params.id)
-    let response = getUserById(id)
+    let response = getToDoById(id)
     res.status(response.status).json(response.text)
 })
 
 
 app.put('/users', function (req, res) {
-    let response = updateUser(req.body)
+    let response = updateToDo(req.body)
     res.status(response.status).send(response.text)
 })
 
 app.delete('/users/:id', function (req, res) {
-    let response = deleteUserById(Number(req.params.id))
+    let response = deleteToDoById(Number(req.params.id))
     res.status(response.status).send(response.text)
 });
 
-//Startar servern
+//Start the server
 app.listen(port, () => {
     console.log(`The server is running on port ${ port }`)
 })
