@@ -22,7 +22,7 @@ let toDoInDatabase = [
     {
         id: 20,
         name: 'Frank',
-        age: 20,
+        age: 25,
         gender: 'Male',
     },
     {
@@ -147,7 +147,7 @@ app.get('/', function (req, res) {
 //API CRUD
 app.post('/users', function (req, res) {
     createNewToDo(req.body)
-    res.json('Successfully created a new ToDo')
+    res.json('Successfully created a new ToDo user')
 })
 
 app.get('/users', function (req, res) {

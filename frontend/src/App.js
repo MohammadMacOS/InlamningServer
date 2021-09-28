@@ -2,6 +2,8 @@ import './App.css';
 import {useState} from "react";
 import http from './utils/api/UsersApi'
 import { JsonToTable } from 'react-json-to-table';
+import "./components/global/style.css"
+
 
 function App() {
     const [text, setText] = useState('ToDo')
@@ -105,34 +107,34 @@ function App() {
                 } }>New ToDo
                 </button>
                 <button onClick={ alive }>alive</button>
-                <button onClick={ getUsers }>get ToDo</button>
+                <button onClick={ getUsers }>get ToDo Users</button>
                 <button onClick={ function () {
-                    getUserById(20)
-                } }>getToDoById
+                    getUserById(id)
+                } }>getToDoUserById
                 </button>
                 <button onClick={ function () {
                     createUser('Frank', 20, 'male')
-                } }>create ToDo
+                } }>create ToDoUser
                 </button>
                 <button onClick={ function () {
-                    updateUser(20, 'Frank', 20, 'male')
+                    updateUser('id', 'name', 'age', 'gender')
                 } }>updateUser
                 </button>
                 <button onClick={ function () {
-                    deleteUserById(20)
+                    deleteUserById(id)
                 } }>deleteToDoById
                 </button>
             </div>
             <div>
                 <section className='user-two'>
-                    <h1>Bring all ToDo</h1>
+                    <h1>Bring allToDo</h1>
                     <button onClick={ getUsers }>getUsers</button>
                     <br/>
                     <JsonToTable json={allUsers}/>
                 </section>
 
                 <section className='user-three'>
-                    <h1>Bring an ToDo</h1>
+                    <h1>Bring an ToDoUser</h1>
                     Id: <input type='number'
                                id='id'
                                value={ id }
@@ -145,7 +147,7 @@ function App() {
                 </section>
 
                 <section className='user-four'>
-                    <h1>Create an ToDo</h1>
+                    <h1>Create an ToDoUser</h1>
 
                     Name: <input type='text'
                                  id='name'
@@ -167,12 +169,12 @@ function App() {
 
                     <button onClick={ function () {
                         createUser(name, age, gender)
-                    } }>Create ToDo
+                    } }>Create ToDoUser
                     </button>
                 </section>
 
                 <section className='user-five'>
-                    <h1>Update an ToDo</h1>
+                    <h1>Update an ToDoUser</h1>
 
                     Id: <input type='number'
                                id='id'
@@ -214,8 +216,8 @@ function App() {
                     <br/>
 
                     <button onClick={ function () {
-                        deleteUserById(id)
-                    } }>Delete ToDo
+                        deleteUserById('userId')
+                    } }>Delete ToDoUser
                     </button>
                 </section>
 
