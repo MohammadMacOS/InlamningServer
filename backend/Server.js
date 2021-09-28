@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// Här finns database relaterat.
+// Here is database relaterat.
 let currentToDoId = 14
 
 

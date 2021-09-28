@@ -9,10 +9,10 @@ function App() {
     const [text, setText] = useState('ToDo')
     const [allUsers, setAllUsers] = useState()
     const [oneUser, setOneUser] = useState()
-    const [id, setId] = useState('')
-    const [name, setName] = useState('Frank')
-    const [age, setAge] = useState(20)
-    const [gender, setGender] = useState('male')
+    const [id, setId] = useState()
+    const [name, setName] = useState()
+    const [age, setAge] = useState()
+    const [gender, setGender] = useState()
 
 
     function alive() {
@@ -107,17 +107,17 @@ function App() {
                 } }>New ToDo
                 </button>
                 <button onClick={ alive }>alive</button>
-                <button onClick={ getUsers }>get ToDo Users</button>
+                <button onClick={ getUsers }>get ToDoUsers</button>
                 <button onClick={ function () {
                     getUserById(id)
                 } }>getToDoUserById
                 </button>
                 <button onClick={ function () {
-                    createUser('Frank', 20, 'male')
+                    createUser('name', "age", 'gender')
                 } }>create ToDoUser
                 </button>
                 <button onClick={ function () {
-                    updateUser('id', 'name', 'age', 'gender')
+                    updateUser('userId', 'userName', 'userAge', 'userGender')
                 } }>updateUser
                 </button>
                 <button onClick={ function () {
