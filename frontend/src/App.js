@@ -1,49 +1,227 @@
 import './App.css';
 import {useState} from "react";
 import http from './utils/api/UsersApi'
+import { JsonToTable } from 'react-json-to-table';
 
 function App() {
-    const [user, setUser] = useState('User')
+    const [text, setText] = useState('ToDo')
+    const [allUsers, setAllUsers] = useState()
+    const [oneUser, setOneUser] = useState()
+    const [id, setId] = useState(20)
+    const [name, setName] = useState('Frank')
+    const [age, setAge] = useState(20)
+    const [gender, setGender] = useState('male')
+
 
     function alive() {
         http.get('/')
-            .then(function(response) {
+            .then(function (response) {
                 console.log(response.data)
-            } )
+                setText(response.data)
+            })
             .catch(function (error) {
+                // handle error
                 console.log(error)
                 return 'Error'
             })
             .then(function () {
-                //always executed
-                            })
+                // always executed
+            })
     }
 
     function getUsers() {
         http.get('/users')
             .then(function (response) {
                 console.log(response.data)
+                setAllUsers(response.data)
             })
-            .catch(function () {
+            .catch(function (error) {
                 console.log(error)
             })
-
     }
 
+    function getUserById(userId) {
+        http.get(`/users/${ userId }`)
+            .then(function (response) {
+                console.log(response.data)
+                setOneUser(response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
 
-  return (
-      <div>
-    <div className='user-one'>
-      <h1>Homework </h1>
-        <h1>How are you doing today ?</h1>
-        <p>{ user }</p>
-        <button onClick={ () => { setUser('new user') } }>New User </button>
-        <button onClick={ alive }>Alive</button>
-        <button onClick={ alive }>Alive</button>
+    function createUser(userName, userAge, userGender) {
+        const payload = {
+            "name": userName,
+            "age": userAge,
+            "gender": userGender
+        }
+        http.post('/users', payload)
+            .then(function (response) {
+                console.log(response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
 
-    </div>
-      </div>
-  );
+    function updateUser(userId, userName, userAge, userGender) {
+        console.log(userId, userName, userAge, userGender)
+        const payload = {
+            "id": userId,
+            "name": userName,
+            "age": userAge,
+            "gender": userGender
+        }
+        console.log(payload)
+        http.put('/users', payload)
+            .then(function (response) {
+                console.log(response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    function deleteUserById(userId) {
+        http.delete(`/users/${ userId }`)
+            .then(function (response) {
+                console.log(response.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    return (
+        <div>
+            <div className='user-one'>
+                <h1>Homework</h1>
+                <p>{ text }</p>
+
+                <button onClick={ () => {
+                    setText('New ToDo')
+                } }>New ToDo
+                </button>
+                <button onClick={ alive }>alive</button>
+                <button onClick={ getUsers }>get ToDo</button>
+                <button onClick={ function () {
+                    getUserById(20)
+                } }>getToDoById
+                </button>
+                <button onClick={ function () {
+                    createUser('Frank', 20, 'male')
+                } }>create ToDo
+                </button>
+                <button onClick={ function () {
+                    updateUser(20, 'Frank', 20, 'male')
+                } }>updateUser
+                </button>
+                <button onClick={ function () {
+                    deleteUserById(20)
+                } }>deleteToDoById
+                </button>
+            </div>
+            <div>
+                <section className='user-two'>
+                    <h1>Bring all ToDo</h1>
+                    <button onClick={ getUsers }>getUsers</button>
+                    <br/>
+                    <JsonToTable json={allUsers}/>
+                </section>
+
+                <section className='user-three'>
+                    <h1>Bring an ToDo</h1>
+                    Id: <input type='number'
+                               id='id'
+                               value={ id }
+                               onChange={ event => setId(event.target.value) }/>
+                    <button onClick={ function () {
+                        getUserById(id)
+                    } }>getUser</button>
+                    <br/>
+                    <JsonToTable json={oneUser}/>
+                </section>
+
+                <section className='user-four'>
+                    <h1>Create an ToDo</h1>
+
+                    Name: <input type='text'
+                                 id='name'
+                                 value={ name }
+                                 onChange={ event => setName(event.target.value) }/>
+                    <br/>
+
+                    Age: <input type='number'
+                                id='age'
+                                value={ age }
+                                onChange={ event => setAge(Number(event.target.value)) }/>
+                    <br/>
+
+                    Gender: <input type='text'
+                                   id='gender'
+                                   value={ gender }
+                                   onChange={ event => setGender(event.target.value) }/>
+                    <br/>
+
+                    <button onClick={ function () {
+                        createUser(name, age, gender)
+                    } }>Create ToDo
+                    </button>
+                </section>
+
+                <section className='user-five'>
+                    <h1>Update an ToDo</h1>
+
+                    Id: <input type='number'
+                               id='id'
+                               value={ id }
+                               onChange={ event => setId(event.target.value) }/>
+                    <br/>
+
+                    Name: <input type='text'
+                                 id='name'
+                                 value={ name }
+                                 onChange={ event => setName(event.target.value) }/>
+                    <br/>
+
+                    Age: <input type='number'
+                                id='age'
+                                value={ age }
+                                onChange={ event => setAge(event.target.value) }/>
+                    <br/>
+
+                    Gender: <input type='text'
+                                   id='gender'
+                                   value={ gender }
+                                   onChange={ event => setGender(event.target.value) }/>
+                    <br/>
+
+                    <button onClick={ function () {
+                        updateUser(id, name, age, gender)
+                    } }>Update ToDo
+                    </button>
+                </section>
+
+                <section className='last-user'>
+                    <h1>Delete an ToDO </h1>
+
+                    Id: <input type='number'
+                               id='id'
+                               value={ id }
+                               onChange={ event => setId(event.target.value) }/>
+                    <br/>
+
+                    <button onClick={ function () {
+                        deleteUserById(id)
+                    } }>Delete ToDo
+                    </button>
+                </section>
+
+            </div>
+        </div>
+    );
 }
 
 export default App;

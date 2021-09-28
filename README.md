@@ -14,4 +14,5 @@ Jag bygger en backend och frontend
 10. `npm install axios`
 11. 
 12. ``npm install cors``
-13. 
+13. ``npm install react-json-to-table``
+
