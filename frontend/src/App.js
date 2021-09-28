@@ -9,7 +9,7 @@ function App() {
     const [text, setText] = useState('ToDo')
     const [allUsers, setAllUsers] = useState()
     const [oneUser, setOneUser] = useState()
-    const [id, setId] = useState(20)
+    const [id, setId] = useState('')
     const [name, setName] = useState('Frank')
     const [age, setAge] = useState(20)
     const [gender, setGender] = useState('male')
@@ -216,7 +216,7 @@ function App() {
                     <br/>
 
                     <button onClick={ function () {
-                        deleteUserById('userId')
+                        deleteUserById('id')
                     } }>Delete ToDoUser
                     </button>
                 </section>
