@@ -32,7 +32,7 @@ function App() {
     }
 
     function getUsers() {
-        http.get('/users')
+        http.get('/toDoUsers')
             .then(function (response) {
                 console.log(response.data)
                 setAllUsers(response.data)
@@ -43,7 +43,7 @@ function App() {
     }
 
     function getUserById(userId) {
-        http.get(`/users/${ userId }`)
+        http.get(`/toDoUsers/${ userId }`)
             .then(function (response) {
                 console.log(response.data)
                 setOneUser(response.data)
@@ -59,7 +59,7 @@ function App() {
             "age": userAge,
             "gender": userGender
         }
-        http.post('/users', payload)
+        http.post('/toDoUsers', payload)
             .then(function (response) {
                 console.log(response.data)
             })
@@ -77,7 +77,7 @@ function App() {
             "gender": userGender
         }
         console.log(payload)
-        http.put('/users', payload)
+        http.put('/toDoUsers', payload)
             .then(function (response) {
                 console.log(response.data)
             })
@@ -87,7 +87,7 @@ function App() {
     }
 
     function deleteUserById(userId) {
-        http.delete(`/users/${ userId }`)
+        http.delete(`/toDoUsers/${ userId }`)
             .then(function (response) {
                 console.log(response.data)
             })

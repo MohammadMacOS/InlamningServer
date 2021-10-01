@@ -54,7 +54,7 @@ function incrementToDoCurrentIdByOne() {
 function toDoMessageNotFound() {
     return {
         status: 404,
-        text: 'User not found!'
+        text: 'toDoUsers not found!'
     }
 }
 
@@ -145,28 +145,28 @@ app.get('/', function (req, res) {
 })
 
 //API CRUD
-app.post('/users', function (req, res) {
+app.post('/toDoUsers', function (req, res) {
     createNewToDo(req.body)
     res.json('Successfully created a new ToDo user')
 })
 
-app.get('/users', function (req, res) {
+app.get('/toDoUsers', function (req, res) {
     res.json(getAllToDo())
 })
 
-app.get('/users/:id', function (req, res) {
+app.get('/toDoUsers/:id', function (req, res) {
     const id = Number(req.params.id)
     let response = getToDoById(id)
     res.status(response.status).json(response.text)
 })
 
 
-app.put('/users', function (req, res) {
+app.put('/toDoUsers', function (req, res) {
     let response = updateToDo(req.body)
     res.status(response.status).send(response.text)
 })
 
-app.delete('/users/:id', function (req, res) {
+app.delete('/toDoUsers/:id', function (req, res) {
     let response = deleteToDoById(Number(req.params.id))
     res.status(response.status).send(response.text)
 });
