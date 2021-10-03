@@ -18,27 +18,29 @@ Jag bygger en backend och frontend
 13. Create a get-request to bring all toDo users.
 14. Create a get-request to bring toDo user byID.
 15. Create a put-request to update toDo user.
-16. Create a delete-request to delete toDo user.
-17. Create a function for toDo ID.
-18. Create a function to get a message that toDo user not found.
-19. Create a function to get message success.
-20. Create a function to create a new toDo user.
-21. Create a function to put toDo users in database.
-22. Create a function to get an toDo user byId.
-23. Create a function update an toDo user.
-24. Create a function to delete toDo in database.
-25. Create a function to delete toDo byId.
+16. Commit and push always to don't forget anything.
+17. Create a delete-request to delete toDo user.
+18. Create a function for toDo ID.
+19. Create a function to get a message that toDo user not found.
+20. Create a function to get message success.
+21. Create a function to create a new toDo user.
+22. Create a function to put toDo users in database.
+23. Create a function to get an toDo user byId.
+24. Create a function update an toDo user.
+25. Create a function to delete toDo in database.
+26. Create a function to delete toDo byId.
+27. Commit and push.
 
 
 ## FrontEnd 
 
 1. ``npm install frontend``
 2. ``npm install react-json-to-table``
-3.  Create variables for create an todo user.
-4.  Create variables for updtae todo users.
+3. Create variables for create an todo user.
+4. Create variables for updtae todo users.
 5. Create one variable for get all todo users.
-6.  Create one variable for delete an todo user.
-7.  Create a function to create a todo user.
+6. Create one variable for delete an todo user.
+7. Create a function to create a todo user.
 8. Create a function to get all todo users.
 9. Create a function to get a todo user by ID.
 10. Create  a function to update todo users.
@@ -47,6 +49,11 @@ Jag bygger en backend och frontend
 13. Create three inputs field and one button to create a new todo user.
 14. Create four inputs field and two buttons to update todo user and to get todo user by ID.
 15. Create one input field and one button to delete todo user.
-16. 
+16. Commit and push to don't forget anything.
+
+
+## Problems and solving problems
+
+1.
 
 

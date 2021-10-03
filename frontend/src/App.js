@@ -24,13 +24,13 @@ function App() {
 
 
  // Skapa todoList
-    function createToDoUser(ListTodo, Liststatus, ListassignedTo) {
+    function createToDoUser(listTodo, listStatus, listAssignedTo) {
         const payload = {
-            "todo": ListTodo,
-            "status": Liststatus,
-            "assignedTo":ListassignedTo
+            "todo": listTodo,
+            "status": listStatus,
+            "assignedTo":listAssignedTo
         }
-        http.post('/toDoUsers', payload)
+        http.post('/toDoLists', payload)
             .then(function (response) {
                 console.log(response.data)
             })
