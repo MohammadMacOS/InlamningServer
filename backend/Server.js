@@ -21,27 +21,27 @@ let currentToDoId = 14
 let toDoInDatabase = [
     {
         id: 20,
-        name: 'Frank',
-        age: 25,
-        gender: 'Male',
+        todo: 'Clean',
+        status: 'Completed',
+        assignedTo: 'Frank',
     },
     {
         id: 21,
-        name: 'Camilla',
-        age: 30,
-        gender: 'Female',
+        todo: 'Homework',
+        status: 'Completed',
+        assignedTo: 'Camilla',
     },
     {
         id: 22,
-        name: 'Suzan',
-        age: 40,
-        gender: 'Female',
+        todo: 'Buy food',
+        status: 'Not completed',
+        assignedTo: 'Suzan',
     },
     {
         id: 23,
-        name: 'Alexander',
-        age: 50,
-        gender: 'Male',
+        todo: 'Sleep early',
+        status: 'Not completed',
+        assignedTo: 'Alexander',
     },
 ]
 
@@ -54,7 +54,7 @@ function incrementToDoCurrentIdByOne() {
 function toDoMessageNotFound() {
     return {
         status: 404,
-        text: 'toDoUsers not found!'
+        text: 'toDoList not found!'
     }
 }
 
@@ -78,14 +78,14 @@ function getToDoIndex(id) {
 
 // CRUD = Create Read Update Delete
 function createNewToDo(todoData) {
-    let user = {
+    let ListToDo = {
         id: currentToDoId,
-        name: todoData.name,
-        age: todoData.age,
-        gender: todoData.gender,
+       todo: todoData.todo,
+        status: todoData.status,
+        assignedTo: todoData.assignedTo,
     }
     incrementToDoCurrentIdByOne()
-    toDoInDatabase.push(user)
+    toDoInDatabase.push(ListToDo)
 }
 
 function getAllToDo() {
@@ -108,17 +108,17 @@ function updateToDo(todoData) {
     if (index === -1) {
         return toDoMessageNotFound()
     } else {
-        if ( toDoInDatabase[index].name !== todoData.name) {
-            toDoInDatabase[index].name = todoData.name;
+        if ( toDoInDatabase[index].todo !== todoData.todo) {
+            toDoInDatabase[index].todo = todoData.todo;
         }
-        if ( toDoInDatabase[index].age !== todoData.age) {
-            toDoInDatabase[index].age = todoData.age
+        if ( toDoInDatabase[index].status !== todoData.status) {
+            toDoInDatabase[index].status = todoData.status
         }
-        if (toDoInDatabase[index].gender !== todoData.gender) {
-            toDoInDatabase[index].gender = todoData.gender
+        if (toDoInDatabase[index].assignedTo !== todoData.assignedTo) {
+            toDoInDatabase[index].assignedTo = todoData.assignedTo
         }
 
-        return toDoMessageSuccess('ToDo updated!')
+        return toDoMessageSuccess('ToDoList updated!')
     }
 }
 
@@ -135,7 +135,7 @@ function deleteToDoById(id) {
         return toDoMessageNotFound()
     } else {
         deleteToDo(index)
-        return toDoMessageSuccess('User deleted!')
+        return toDoMessageSuccess('ToDo deleted!')
     }
 }
 
@@ -145,28 +145,28 @@ app.get('/', function (req, res) {
 })
 
 //API CRUD
-app.post('/toDoUsers', function (req, res) {
+app.post('/toDoLists', function (req, res) {
     createNewToDo(req.body)
-    res.json('Successfully created a new ToDo user')
+    res.json('Successfully created a new ToDo')
 })
 
-app.get('/toDoUsers', function (req, res) {
+app.get('/toDoLists', function (req, res) {
     res.json(getAllToDo())
 })
 
-app.get('/toDoUsers/:id', function (req, res) {
+app.get('/toDoLists/:id', function (req, res) {
     const id = Number(req.params.id)
     let response = getToDoById(id)
     res.status(response.status).json(response.text)
 })
 
 
-app.put('/toDoUsers', function (req, res) {
+app.put('/toDoLists', function (req, res) {
     let response = updateToDo(req.body)
     res.status(response.status).send(response.text)
 })
 
-app.delete('/toDoUsers/:id', function (req, res) {
+app.delete('/toDoLists/:id', function (req, res) {
     let response = deleteToDoById(Number(req.params.id))
     res.status(response.status).send(response.text)
 });
