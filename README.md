@@ -2,7 +2,7 @@
 
 Jag bygger en backend och frontend
 
-1. Backend
+## 1. Backend
 2. Create backend folder.
 3. Create server.js file.
 4. ```npm install -D nodemon```
@@ -28,7 +28,6 @@ Jag bygger en backend och frontend
 24. Create a function update an toDo user.
 25. Create a function to delete toDo in database.
 26. Create a function to delete toDo byId.
-   
 
 
 ## FrontEnd 
