@@ -67,7 +67,7 @@ function App() {
 
     // Updatera todouser
 
-    function updateUser(listId, listTodo, listStatus, listAssignedTo) {
+    function updateToDoUser(listId, listTodo, listStatus, listAssignedTo) {
         console.log(listId, listTodo, listStatus, listAssignedTo)
         const payload = {
             "id": listId,
@@ -163,9 +163,9 @@ function App() {
                     <br/>
 
                     <button onClick={ function () {
-                        updateUser(toDoId, updateToDo, updateStatusToDo, updateAssigendTo)
+                        updateToDoUser(toDoId, updateToDo, updateStatusToDo, updateAssigendTo)
                     } }><strong>Update ToDoList</strong>
-                        <JsonToTable json={updateUser}/>
+                        <JsonToTable json={updateToDoUser}/>
                     </button>
                     <button onClick={ function () {
                         getToDoUserById(toDoId)
