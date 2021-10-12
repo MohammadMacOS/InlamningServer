@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from "react";
-import http from './utils/api/UserApi'
+import http from './utils/api/UsersApi'
 import { JsonToTable } from 'react-json-to-table';
 import "./components/global/style.css"
 

@@ -52,8 +52,12 @@ Jag bygger en backend och frontend
 16. Commit and push to don't forget anything.
 
 
-## Problems and solving problems
+## Problems and solving problems , Hard and easy in this homework
 
-1.
+1. I got some problems when I am runnig the server , I forgot to add .env file, I couldn't run the server on the port 3001, after I added .env file I got good result.
+2. I couldn't get the update result by myslef, I watched the teacher's lesson, I got the update result after that.
+3. It was hard for me to build Server.js from the beginning but by help from teacher's lesson I fixed the problem.
+4. It was hard for me to get some result from Backend but by watching videos I got the result.
+5. I got some wrong result in the beginning, it was my mistake and I wrote the right code after that. 
 
 

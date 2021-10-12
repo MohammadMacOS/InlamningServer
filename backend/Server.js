@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
-dotenv.config()
+dotenv.config();
 const app = express()
 const port = process.env.PORT
 
@@ -173,6 +173,15 @@ app.delete('/toDoLists/:id', function (req, res) {
 
 //Start the server
 app.listen(port, () => {
-    console.log(`The server is running on port ${ port }`)
+    console.log(`The server is running on port ${ port }`);
 })
+
+
+
+
+
+
+
+
+
 
