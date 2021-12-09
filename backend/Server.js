@@ -68,8 +68,9 @@ function toDoMessageSuccess(message) {
 
 //search in database.
 function getToDoIndex(id) {
+    console.log(typeof (id))
     for (let i = 0; i <  toDoInDatabase.length; i++) {
-        if ( toDoInDatabase[i].id === id) {
+        if ( toDoInDatabase[i].id === Number(id) ){
             return i
         }
     }
@@ -103,13 +104,15 @@ function getToDoById(id) {
 }
 
 function updateToDo(todoData) {
+     console.log(todoData)
     let index = getToDoIndex(todoData.id)
 
     if (index === -1) {
+        console.log('Could not find id')
         return toDoMessageNotFound()
     } else {
         if ( toDoInDatabase[index].todo !== todoData.todo) {
-            toDoInDatabase[index].todo = todoData.todo;
+            toDoInDatabase[index].todo = todoData.todo
         }
         if ( toDoInDatabase[index].status !== todoData.status) {
             toDoInDatabase[index].status = todoData.status

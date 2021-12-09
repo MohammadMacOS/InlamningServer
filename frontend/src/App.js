@@ -9,12 +9,12 @@ function App() {
     // Skapa TodoList
     const [toDo, setToDo] = useState()
     const [status, setStatus] = useState() // alluser
-    const [assigendTo, setassignedTo] = useState() // oneuser
+    const [assignedTo, setAssignedTo] = useState() // oneuser
     // Updatera TodoList
     const [toDoId, setToDoId ] = useState() // id - setID
     const [updateToDo, setUpdateToDo ] = useState() // name
     const [updateStatusToDo, setUpdateStatusTDo] = useState() // age
-    const [updateAssigendTo, setUpdateAssignedTo] = useState()
+    const [updateAssignedTo, setUpdateAssignedTo] = useState()
     // Hämta all todoList
     const [allToDoUsers, setAllToDoUsers] = useState()
     // Radera todoList by ID
@@ -53,19 +53,19 @@ function App() {
     }
 
 
-// Hämta todouser by Id
+// Hämta to do user by Id
     function getToDoUserById(listId) {
         http.get(`/toDoLists/${ listId }`)
             .then(function (response) {
                 console.log(response.data)
-                setassignedTo(response.data)
+                setAssignedTo(response.data)
             })
             .catch(function (error) {
                 console.log(error)
             })
     }
 
-    // Updatera todouser
+    // Updatera to do user
 
     function updateToDoUser(listId, listTodo, listStatus, listAssignedTo) {
         console.log(listId, listTodo, listStatus, listAssignedTo)
@@ -84,7 +84,7 @@ function App() {
                 console.log(error)
             })
     }
-    // Radera todouser
+    // Radera to do user
 
     function deleteToDoUserById(listId) {
         http.delete(`/toDoLists/${ listId }`)
@@ -122,14 +122,14 @@ function App() {
                            placeholder="status"
                            onChange={ event => setStatus(event.target.value) }/>
 
-                  <strong>  assigendTo </strong>  <input type='text'
-                           id='assignedTo'
-                           value={ assigendTo }
-                           placeholder="assigendTo"
-                           onChange={ event => setassignedTo(event.target.value) }/>
+                  <strong>  AssignedTo </strong>  <input type='text'
+                           id='AssignedTo'
+                           value={ assignedTo }
+                           placeholder="assignedTo"
+                           onChange={ event => setAssignedTo(event.target.value) }/>
                     <br/>
                     <button onClick={ function () {
-                        createToDoUser(toDo, status, assigendTo)
+                        createToDoUser(toDo, status, assignedTo)
                     } }><strong>Create ToDoList</strong>
                     </button>
 
@@ -156,14 +156,14 @@ function App() {
                                 onChange={ event => setUpdateStatusTDo(event.target.value) }/>
 
 
-                    <strong> AssigendTo: </strong><input type='text'
+                    <strong> AssignedTo: </strong><input type='text'
                                    id='gender'
-                                   value={ updateAssigendTo }
+                                   value={ updateAssignedTo }
                                    onChange={ event => setUpdateAssignedTo(event.target.value) }/>
                     <br/>
 
                     <button onClick={ function () {
-                        updateToDoUser(toDoId, updateToDo, updateStatusToDo, updateAssigendTo)
+                        updateToDoUser(toDoId, updateToDo, updateStatusToDo, updateAssignedTo)
                     } }><strong>Update ToDoList</strong>
                         <JsonToTable json={updateToDoUser}/>
                     </button>
